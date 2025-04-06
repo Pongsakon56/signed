@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ลงนามถวายพระพร</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun&display=swap" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    body {
+      font-family: 'Sarabun', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+    }
+    .container {
+      max-width: 500px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #004085;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      margin: 1rem auto;
+      border-radius: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.3rem;
+      color: #333;
+    }
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    input[type="submit"] {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 1rem;
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>ลงนามถวายพระพร</h1>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/King_Rama_X_portrait.png/440px-King_Rama_X_portrait.png" alt="พระบาทสมเด็จพระเจ้าอยู่หัว">
+    <form name="myForm">
+      <label for="name">ข้าพระพุทธเจ้า</label>
+      <input type="text" name="name" placeholder="ชื่อ สกุล" required>
+
+      <label for="Phone">เบอร์โทร</label>
+      <input type="text" id="Phone" name="Phone" placeholder="เบอร์โทร" required>
+
+      <label for="email">อีเมล (ถ้ามี)</label>
+      <input type="email" id="email" name="email" placeholder="example@email.com">
+
+      <input type="submit" value="ลงนามถวายพระพร">
+    </form>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'
+    const form = document.forms['myForm']
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'ลงนามถวายพระพรเรียบร้อย',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+
+</body>
+</html>
